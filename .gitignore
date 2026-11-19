@@ -1,30 +1,43 @@
-*.log
-.DS_Store
+# ==========================================
+# 1. Environment & Konfigurasi
+# ==========================================
 .env
 .env.backup
 .env.production
-.phpactor.json
-.phpunit.result.cache
-.AGENTS.md
-.CLAUDE.md
-/.codex
-/.cursor/
-/.idea
-/.nova``
-/.phpunit.cache
-/.vscode
-/.zed
-/auth.json
+.auth.json
+/agents
+/.agents
+/AGENTS.md
+CLAUDE.md
+
+# ==========================================
+# 2. Dependensi & Build
+# ==========================================
 /node_modules
+/vendor
 /public/build
-/public/fonts-manifest.dev.json
 /public/hot
 /public/storage
+/public/fonts-manifest.dev.json
+
+
 /storage/*.key
 /storage/pail
-/vendor
-/.agents
+*.log
+Thumbs.db
+.DS_Store
+
+
+/.idea
+/.nova
+/.zed
+/.codex
+/.cursor/
+.phpactor.json
+.phpunit.result.cache
+/.phpunit.cache
 _ide_helper.php
+
+
 Homestead.json
 Homestead.yaml
-Thumbs.db
