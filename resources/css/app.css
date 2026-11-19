@@ -7,3 +7,92 @@
     --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+    html {
+        color-scheme: light;
+    }
+
+    html.dark {
+        color-scheme: dark;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@layer utilities {
+    #main-content > article article {
+        @apply transition-colors duration-300;
+    }
+
+    html.dark body {
+        @apply bg-slate-950 text-slate-100;
+    }
+
+    html.dark #primary-sidebar {
+        @apply bg-slate-900 border-slate-800;
+    }
+
+    html.dark #primary-sidebar > header,
+    html.dark #primary-sidebar > footer {
+        @apply border-slate-800;
+    }
+
+    html.dark #primary-sidebar .text-slate-900,
+    html.dark #main-content > header .text-slate-800,
+    html.dark #main-content > article .text-slate-900,
+    html.dark #main-content > article .text-slate-800 {
+        @apply text-slate-100;
+    }
+
+    html.dark #primary-sidebar .text-slate-700,
+    html.dark #main-content > article .text-slate-700 {
+        @apply text-slate-200;
+    }
+
+    html.dark #primary-sidebar .text-slate-600,
+    html.dark #main-content > header .text-slate-600,
+    html.dark #main-content > article .text-slate-600 {
+        @apply text-slate-300;
+    }
+
+    html.dark #primary-sidebar .text-slate-500,
+    html.dark #main-content > header .text-slate-500,
+    html.dark #main-content > article .text-slate-500 {
+        @apply text-slate-400;
+    }
+
+    html.dark #primary-sidebar .text-slate-400,
+    html.dark #main-content > article .text-slate-400 {
+        @apply text-slate-500;
+    }
+
+    html.dark #primary-sidebar .hover\:bg-slate-50:hover {
+        @apply bg-slate-800;
+    }
+
+    html.dark #main-content {
+        @apply bg-slate-950;
+    }
+
+    html.dark #main-content > header,
+    html.dark #main-content > article article {
+        @apply bg-slate-900 border-slate-800;
+    }
+
+    html.dark #main-content > header .bg-slate-100 {
+        @apply bg-slate-800 border-slate-700;
+    }
+
+    html.dark #main-content > article .bg-slate-50 {
+        @apply bg-slate-950 border-slate-700;
+    }
+
+    html.dark #main-content > article .bg-blue-50 {
+        @apply bg-blue-950/50;
+    }
+}
