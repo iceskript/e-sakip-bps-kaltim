@@ -12,13 +12,9 @@
                 Selamat Datang di <span class="text-blue-700">e-SAKIP</span> BPS Kaltim
             </h2>
             <p class="text-slate-500 text-sm leading-relaxed">
-                Sistem Manajemen SAKIP Terintegrasi BPS Provinsi Kalimantan Timur. Silakan kelola data kinerja, monitoring capaian, dan pelaporan dengan mudah.
+                Sistem Akuntabilitas Kinerja Instansi Pemerintah BPS Provinsi Kalimantan Timur.
             </p>
         </section>
-        <!-- Aksen Gambar di Kanan -->
-        <figure class="hidden lg:block w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center">
-             <img src="{{ asset('images/logo.webp') }}" class="w-12 h-12 opacity-50" alt="Logo BPS">
-        </figure>
     </article>
 
     <!-- STATISTIK SECTION -->
