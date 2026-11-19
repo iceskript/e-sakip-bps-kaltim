@@ -17,6 +17,9 @@
         "@laravel/multiplex": "^0.4.1"
     },
     "dependencies": {
+        "@fullcalendar/core": "^6.1.22",
+        "@fullcalendar/daygrid": "^6.1.22",
+        "@fullcalendar/interaction": "^6.1.22",
         "alpinejs": "^3.17.5",
         "fontaine": "^1.0.3"
     }

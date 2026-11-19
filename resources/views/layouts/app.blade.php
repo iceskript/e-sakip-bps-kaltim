@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.webp') }}">
 
     <script>
         const savedTheme = localStorage.getItem('e-sakip-theme');
@@ -28,7 +29,6 @@
         if (localStorage.getItem('e-sakip-theme') !== null) {
             return;
         }
-
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
             if (localStorage.getItem('e-sakip-theme') === null) {
                 this.isDark = matches;
@@ -49,13 +49,9 @@
         }
     }
 }"
-    x-init="initTheme()"
-    @resize.window="syncSidebarToViewport()">
-
-    <!-- SEMANTIC: Section untuk layout utama -->
+    x-init="initTheme()" @resize.window="syncSidebarToViewport()">
     <section class="flex h-screen overflow-hidden relative">
 
-        <!-- OVERLAY GELAP (Hanya muncul di Mobile saat sidebar terbuka) -->
         <div x-show="sidebarOpen" x-transition.opacity.duration.300ms @click="sidebarOpen = false"
             class="fixed inset-0 bg-slate-900/60 z-30 lg:hidden" aria-hidden="true" style="display: none;"></div>
 
@@ -66,7 +62,7 @@
             :class="sidebarOpen ? 'translate-x-0 w-[280px]' : '-translate-x-full lg:translate-x-0 lg:w-20'"
             aria-label="Sidebar Navigasi">
 
-            <!-- Header Sidebar (Logo & Tombol X) -->
+            <!-- Header Sidebar -->
             <header class="h-[88px] flex items-center px-6 border-b border-slate-100 justify-between shrink-0">
                 <section class="flex items-center overflow-hidden">
                     <figure class="flex-shrink-0">
@@ -82,7 +78,6 @@
                     </section>
                 </section>
 
-                <!-- TOMBOL X (Hanya Mobile) -->
                 <button @click="sidebarOpen = false"
                     class="lg:hidden text-slate-400 hover:text-red-500 p-2 rounded-lg transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,7 +87,7 @@
                 </button>
             </header>
 
-            <!-- Navigasi Menu (LENGKAP) -->
+            <!-- Navigasi Menu -->
             <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1" aria-label="Menu Navigasi Utama"
                 @click="if (!isDesktop && $event.target.closest('a')) { sidebarOpen = false }">
 
@@ -283,7 +278,8 @@
                             d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                     <span x-show="sidebarOpen" class="flex flex-col whitespace-nowrap">
-                        <span class="font-semibold text-sm tex
+                        <span
+                            class="font-semibold text-sm tex
                         t-slate-700 group-hover:text-white">SINERGI</span>
                         <span class="text-[10px] text-slate-400 group-hover:text-blue-200">Kolaborasi Unit</span>
                     </span>
@@ -307,8 +303,8 @@
                     </span>
                 </a>
 
-                <!-- FOOTER SIDEBAR (Logo & Versi) -->
-                <footer class="p-4 border-t border-slate-100 shrink-0">
+                <!-- FOOTER SIDEBAR -->
+                <footer class="px-3 py-4 border-t border-slate-100 shrink-0">
                     <div class="flex items-center gap-3 px-2">
                         <!-- Logo BPS Kecil -->
                         <figure class="flex-shrink-0">
