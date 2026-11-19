@@ -2,9 +2,10 @@
 .env.backup
 .env.production
 .auth.json
-/agents
-/.agents
-/AGENTS.md
+
+.claude/
+
+AGENTS.md
 CLAUDE.md
 
 /node_modules
@@ -25,6 +26,7 @@ Thumbs.db
 /.zed
 /.codex
 /.cursor/
+.vscode/
 .phpactor.json
 .phpunit.result.cache
 /.phpunit.cache
