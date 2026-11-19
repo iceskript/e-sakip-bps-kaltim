@@ -2,7 +2,7 @@
 
 Sistem Informasi Akuntabilitas Kinerja Instansi Pemerintah (SAKIP) untuk lingkungan BPS Provinsi Kalimantan Timur. 
 
-Project ini dibangun untuk mendigitalisasi proses perencanaan, pengukuran, pelaporan, hingga evaluasi kinerja agar tidak lagi menggunakan Excel atau dokumen fisik yang tersebar.
+Project ini dibangun untuk mendigitalisasi proses perencanaan, pengukuran, pelaporan, hingga evaluasi kinerja.
 
 ## Tech Stack
 *   **Backend:** Laravel (PHP)
