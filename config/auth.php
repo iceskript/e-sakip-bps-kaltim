@@ -20,6 +20,11 @@ return [
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
     ],
 
+    'admin_emails' => array_values(array_filter(array_map(
+        static fn (string $email): string => strtolower(trim($email)),
+        explode(',', (string) env('ADMIN_EMAILS', ''))
+    ))),
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards

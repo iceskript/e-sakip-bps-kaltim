@@ -35,4 +35,17 @@ return [
         ],
     ],
 
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URI', env('APP_URL').'/auth/google/callback'),
+        'guzzle' => [
+            'verify' => env('GOOGLE_CA_BUNDLE') ?: (ini_get('curl.cainfo') ?: true),
+        ],
+        'allowed_emails' => array_values(array_filter(array_map(
+            static fn (string $email): string => strtolower(trim($email)),
+            explode(',', (string) env('GOOGLE_ALLOWED_EMAILS', ''))
+        ))),
+    ],
+
 ];

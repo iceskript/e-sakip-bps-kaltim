@@ -5,6 +5,7 @@
 
 .claude/
 .agents/skills
+.codex/
 
 AGENTS.md
 CLAUDE.md

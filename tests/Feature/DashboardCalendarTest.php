@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Jadwal;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -10,6 +11,16 @@ use Tests\TestCase;
 class DashboardCalendarTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $user = User::factory()->create();
+        config(['services.google.allowed_emails' => [strtolower($user->email)]]);
+
+        $this->actingAs($user);
+    }
 
     public function test_dashboard_displays_saved_calendar_activities(): void
     {
