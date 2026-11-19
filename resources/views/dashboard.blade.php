@@ -212,34 +212,44 @@
                     </div>
 
                     @foreach ($calendarWeeks as $week)
-                        <div class="grid grid-cols-7 auto-rows-[2.5rem] border-b border-slate-100 last:border-b-0 sm:auto-rows-[1.5rem] dark:border-slate-800"
-                            style="grid-template-rows: 5.5rem;">
+                        <div class="grid grid-cols-7 auto-rows-[1.5rem] [grid-template-rows:3.5rem] border-b border-slate-100 last:border-b-0 dark:border-slate-800">
                             @foreach ($week['days'] as $day)
                                 <section
-                                    class="group h-[88px] min-w-0 border-r border-slate-100 px-0 sm:px-1 last:border-r-0 dark:border-slate-800 {{ $day['date']->month === $month->month ? 'text-slate-700' : 'text-slate-400 dark:text-slate-600' }}"
+                                    class="group h-full min-w-0 border-r border-slate-100 px-0 sm:px-1 last:border-r-0 dark:border-slate-800 {{ $day['date']->month === $month->month ? 'text-slate-700' : 'text-slate-400 dark:text-slate-600' }}"
                                     style="grid-column: {{ $day['date']->dayOfWeekIso }}; grid-row: 1;">
-                                    <header class="flex items-center justify-between">
-                                        <button type="button"
-                                            @click="openActivityForm('{{ $day['date']->toDateString() }}')"
-                                            class="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
-                                            aria-label="Tambah kegiatan tanggal {{ $day['date']->format('d-m-Y') }}"
-                                            title="Tambah kegiatan pada tanggal ini">
-                                            <span
-                                                class="flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold transition-colors hover:bg-blue-50 dark:hover:bg-slate-800 {{ $day['date']->isToday() ? 'bg-blue-600 text-white hover:bg-blue-700 dark:hover:bg-blue-700' : '' }}">
-                                                {{ $day['date']->format('j') }}
+                                    <header class="flex h-full items-center justify-between">
+                                        @if ($day['hasActivity'])
+                                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
+                                                <span
+                                                    class="flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold {{ $day['date']->isToday() ? 'bg-blue-600 text-white' : '' }}">
+                                                    {{ $day['date']->format('j') }}
+                                                </span>
                                             </span>
-                                        </button>
-                                        <button type="button"
-                                            @click="openActivityForm('{{ $day['date']->toDateString() }}')"
-                                            class="hidden h-7 w-7 shrink-0 items-center justify-center rounded text-slate-400 transition-opacity hover:bg-blue-50 hover:text-blue-600 focus-visible:opacity-100 sm:inline-flex sm:opacity-0 sm:group-hover:opacity-100 dark:hover:bg-slate-800"
-                                            aria-label="Tambah kegiatan tanggal {{ $day['date']->format('d-m-Y') }}"
-                                            title="Tambah kegiatan">
-                                            <svg class="h-4 w-4" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24" aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M12 5v14m-7-7h14" />
-                                            </svg>
-                                        </button>
+                                        @else
+                                            <button type="button"
+                                                data-add-activity-date="{{ $day['date']->toDateString() }}"
+                                                @click="openActivityForm('{{ $day['date']->toDateString() }}')"
+                                                class="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+                                                aria-label="Tambah kegiatan tanggal {{ $day['date']->format('d-m-Y') }}"
+                                                title="Tambah kegiatan pada tanggal ini">
+                                                <span
+                                                    class="flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold transition-colors hover:bg-blue-50 dark:hover:bg-slate-800 {{ $day['date']->isToday() ? 'bg-blue-600 text-white hover:bg-blue-700 dark:hover:bg-blue-700' : '' }}">
+                                                    {{ $day['date']->format('j') }}
+                                                </span>
+                                            </button>
+                                            <button type="button"
+                                                data-add-activity-date="{{ $day['date']->toDateString() }}"
+                                                @click="openActivityForm('{{ $day['date']->toDateString() }}')"
+                                                class="hidden h-7 w-7 shrink-0 items-center justify-center rounded text-slate-400 transition-opacity hover:bg-blue-50 hover:text-blue-600 focus-visible:opacity-100 sm:inline-flex sm:opacity-0 sm:group-hover:opacity-100 dark:hover:bg-slate-800"
+                                                aria-label="Tambah kegiatan tanggal {{ $day['date']->format('d-m-Y') }}"
+                                                title="Tambah kegiatan">
+                                                <svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M12 5v14m-7-7h14" />
+                                                </svg>
+                                            </button>
+                                        @endif
                                     </header>
                                 </section>
                             @endforeach

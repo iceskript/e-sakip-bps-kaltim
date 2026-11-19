@@ -60,6 +60,24 @@ class DashboardCalendarTest extends TestCase
             });
     }
 
+    public function test_calendar_hides_add_controls_for_dates_occupied_by_activities(): void
+    {
+        Jadwal::create([
+            'judul' => 'Rapat koordinasi',
+            'kategori' => 'Renstra',
+            'tanggal_mulai' => '2026-11-18',
+            'tanggal_selesai' => '2026-11-20',
+        ]);
+
+        $this->get(route('dashboard', ['month' => '2026-11']))
+            ->assertOk()
+            ->assertSee('data-add-activity-date="2026-11-17"', false)
+            ->assertDontSee('data-add-activity-date="2026-11-18"', false)
+            ->assertDontSee('data-add-activity-date="2026-11-19"', false)
+            ->assertDontSee('data-add-activity-date="2026-11-20"', false)
+            ->assertSee('data-add-activity-date="2026-11-21"', false);
+    }
+
     public function test_activity_can_be_created_and_is_saved(): void
     {
         $response = $this->post(route('jadwals.store'), [

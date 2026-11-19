@@ -70,6 +70,22 @@ class DashboardController extends Controller
                 ];
             }
 
+            $occupiedColumns = [];
+
+            foreach ($bars as $bar) {
+                $lastColumn = $bar['startColumn'] + $bar['columnSpan'] - 1;
+
+                for ($column = $bar['startColumn']; $column <= $lastColumn; $column++) {
+                    $occupiedColumns[$column] = true;
+                }
+            }
+
+            $days = $days->map(function (array $day) use ($occupiedColumns): array {
+                $day['hasActivity'] = isset($occupiedColumns[$day['date']->dayOfWeekIso]);
+
+                return $day;
+            });
+
             $calendarWeeks[] = [
                 'days' => $days,
                 'bars' => $bars,
