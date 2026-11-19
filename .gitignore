@@ -1,6 +1,3 @@
-# ==========================================
-# 1. Environment & Konfigurasi
-# ==========================================
 .env
 .env.backup
 .env.production
@@ -10,9 +7,6 @@
 /AGENTS.md
 CLAUDE.md
 
-# ==========================================
-# 2. Dependensi & Build
-# ==========================================
 /node_modules
 /vendor
 /public/build
@@ -20,13 +14,11 @@ CLAUDE.md
 /public/storage
 /public/fonts-manifest.dev.json
 
-
 /storage/*.key
 /storage/pail
 *.log
 Thumbs.db
 .DS_Store
-
 
 /.idea
 /.nova
@@ -37,7 +29,6 @@ Thumbs.db
 .phpunit.result.cache
 /.phpunit.cache
 _ide_helper.php
-
 
 Homestead.json
 Homestead.yaml
