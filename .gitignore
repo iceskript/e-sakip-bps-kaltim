@@ -4,6 +4,7 @@
 .auth.json
 
 .claude/
+.agents/skills
 
 AGENTS.md
 CLAUDE.md
