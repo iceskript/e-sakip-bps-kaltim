@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CapaianKinerja;
+use App\Models\IkssMaster;
 use App\Models\Jadwal;
+use App\Models\Periode;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -108,11 +111,32 @@ class DashboardController extends Controller
             ->orderBy('tanggal_mulai')
             ->get();
 
+        $totalIndicators = IkssMaster::query()->count();
+        $activePeriod = Periode::query()
+            ->where('is_active', true)
+            ->orderByDesc('tahun')
+            ->orderByDesc('triwulan')
+            ->first();
+        $periodEntries = CapaianKinerja::query()
+            ->where('periode_id', $activePeriod?->id ?? 0);
+        $completedIndicators = $activePeriod
+            ? (clone $periodEntries)->where('status', 'Sudah Diisi')->count()
+            : 0;
+        $inProgressIndicators = $activePeriod
+            ? (clone $periodEntries)->where('status', 'Sebagian')->count()
+            : 0;
+
         return view('dashboard', [
             'month' => $month,
             'calendarWeeks' => $calendarWeeks,
             'upcomingActivities' => $upcomingActivities,
             'soonActivities' => $soonActivities,
+            'statusCounts' => [
+                'notStarted' => max($totalIndicators - $completedIndicators - $inProgressIndicators, 0),
+                'inProgress' => $inProgressIndicators,
+                'completed' => $completedIndicators,
+                'deadlines' => $upcomingActivities->count(),
+            ],
         ]);
     }
 }

@@ -10,17 +10,91 @@
 
 @variant dark (&:where(.dark, .dark *));
 
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    @view-transition {
+        navigation: none;
+    }
+}
+
 @layer base {
     html {
         color-scheme: light;
     }
 
+    dialog:modal {
+        overscroll-behavior: contain;
+    }
+
+    dialog::backdrop {
+        background: rgb(15 23 42 / 0.6);
+        overflow: hidden;
+        overscroll-behavior: contain;
+    }
+
     html.dark {
         color-scheme: dark;
+        --color-slate-950: var(--color-gray-900);
+        --color-slate-900: var(--color-gray-800);
+        --color-slate-800: var(--color-gray-700);
+        --color-slate-700: var(--color-gray-700);
+        --color-slate-600: var(--color-gray-600);
+        --color-slate-500: var(--color-gray-500);
+        --color-slate-400: var(--color-gray-400);
+        --color-slate-300: var(--color-gray-300);
+        --color-slate-200: var(--color-gray-200);
+        --color-slate-100: var(--color-gray-100);
+        --color-slate-50: var(--color-gray-50);
     }
 
     [x-cloak] {
         display: none !important;
+    }
+}
+
+@media (max-width: 1023px) {
+    #primary-sidebar {
+        box-shadow: none;
+    }
+
+    #primary-navigation {
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    #primary-navigation > h2 {
+        display: none !important;
+    }
+
+    #primary-navigation > a,
+    #primary-navigation > .lakin-menu {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    #primary-navigation > a {
+        padding: 0.5rem 0.75rem;
+    }
+
+    #primary-navigation > a > svg {
+        margin-right: 0.5rem;
+    }
+
+    #primary-navigation > a > span > span:not(.sr-only):nth-child(2) {
+        display: none;
+    }
+
+    #primary-navigation .lakin-submenu {
+        position: fixed;
+        top: 8rem;
+        left: 0.75rem;
+        max-height: calc(100dvh - 9rem);
+        overflow: auto;
     }
 }
 
@@ -93,7 +167,7 @@
     }
 
     html.dark #main-content > article .bg-blue-50 {
-        @apply bg-blue-950/50;
+        @apply bg-gray-800;
     }
 }
 

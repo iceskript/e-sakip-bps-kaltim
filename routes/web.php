@@ -1,10 +1,16 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\CapaianKinerjaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\EntryCapaianController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\IkssController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\LakinController;
+use App\Http\Controllers\MonitoringController;
+use App\Http\Controllers\NotulaController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +46,36 @@ Route::middleware(['auth', 'user.active'])->group(function () {
         ->name('account.password.update');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/ikss', [IkssController::class, 'index'])->name('ikss.index');
+    Route::resource('ikss', IkssController::class)
+        ->except('show')
+        ->parameters(['ikss' => 'ikssMaster']);
+    Route::get('/ikss/{ikssMaster}/capaian/edit', [CapaianKinerjaController::class, 'edit'])
+        ->name('ikss.capaian.edit');
+    Route::put('/ikss/{ikssMaster}/capaian', [CapaianKinerjaController::class, 'update'])
+        ->name('ikss.capaian.update');
+    Route::get('/entry-capaian', [EntryCapaianController::class, 'index'])
+        ->name('capaian-kinerja.index');
+    Route::put('/entry-capaian/{ikssMaster}', [EntryCapaianController::class, 'update'])
+        ->name('capaian-kinerja.update');
+    Route::delete('/capaian-kinerja/{capaianKinerja}', [CapaianKinerjaController::class, 'destroy'])
+        ->name('capaian-kinerja.destroy');
+    Route::get('/monitoring-kinerja', [MonitoringController::class, 'index'])
+        ->name('monitoring.index');
+    Route::get('/generate-notula', [NotulaController::class, 'index'])
+        ->name('notula.index');
+    Route::post('/generate-notula/simpan-rapat', [NotulaController::class, 'storeRapat'])
+        ->name('notula.storeRapat');
+    Route::post('/generate-notula/upload-excel', [NotulaController::class, 'uploadExcel'])
+        ->name('notula.uploadExcel');
+    Route::post('/generate-notula/generate', [NotulaController::class, 'generate'])
+        ->name('notula.generate');
+    Route::get('/dokumen/{menuKey}', [DokumenController::class, 'index'])
+        ->whereIn('menuKey', ['renstra', 'perjanjian_kinerja'])
+        ->name('dokumens.index');
+    Route::get('/lakin/{lakin}/download', [LakinController::class, 'download'])
+        ->name('lakin.download');
+    Route::resource('lakin', LakinController::class)
+        ->only(['index', 'store', 'destroy']);
 
     Route::post('/jadwals', [JadwalController::class, 'store'])->name('jadwals.store');
     Route::delete('/jadwals/{jadwal}', [JadwalController::class, 'destroy'])->name('jadwals.destroy');

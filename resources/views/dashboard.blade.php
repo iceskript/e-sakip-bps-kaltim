@@ -118,40 +118,59 @@
     <section aria-labelledby="ringkasan-status">
         <h2 id="ringkasan-status" class="text-lg font-semibold text-slate-800 mb-4">Ringkasan Status</h2>
         
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <section class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <article class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col">
-                <header class="flex justify-between items-start mb-4">
+                <header class="mb-4 flex items-start justify-between gap-3">
                     <h3 class="text-sm font-semibold text-slate-500">Belum Mulai</h3>
-                    <span class="w-2.5 h-2.5 rounded-full bg-slate-300" aria-hidden="true"></span>
+                    <span class="grid size-10 place-items-center rounded-xl bg-slate-100 text-slate-600 dark:bg-gray-800 dark:text-gray-100">
+                        <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9" stroke-width="1.8" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 7v5l3 2" />
+                        </svg>
+                    </span>
                 </header>
-                <p class="text-3xl font-bold text-slate-800 mb-1">0</p>
+                <p x-data="countUp(@js($statusCounts['notStarted']))" x-text="value" class="mb-1 text-3xl font-bold text-slate-800 dark:text-gray-100">{{ $statusCounts['notStarted'] }}</p>
                 <footer class="text-xs text-slate-400">Indikator Kinerja</footer>
             </article>
 
             <article class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col">
-                <header class="flex justify-between items-start mb-4">
+                <header class="mb-4 flex items-start justify-between gap-3">
                     <h3 class="text-sm font-semibold text-slate-500">Sedang Berjalan</h3>
-                    <span class="w-2.5 h-2.5 rounded-full bg-blue-500" aria-hidden="true"></span>
+                    <span class="grid size-10 place-items-center rounded-xl bg-blue-50 text-blue-700 dark:bg-gray-800 dark:text-gray-100">
+                        <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 19V5m0 14h16M8 15l3-4 3 2 5-6" />
+                        </svg>
+                    </span>
                 </header>
-                <p class="text-3xl font-bold text-blue-700 mb-1">0</p>
+                <p x-data="countUp(@js($statusCounts['inProgress']))" x-text="value" class="mb-1 text-3xl font-bold text-blue-700 dark:text-gray-100">{{ $statusCounts['inProgress'] }}</p>
                 <footer class="text-xs text-slate-400">Indikator Kinerja</footer>
             </article>
 
             <article class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col">
-                <header class="flex justify-between items-start mb-4">
+                <header class="mb-4 flex items-start justify-between gap-3">
                     <h3 class="text-sm font-semibold text-slate-500">Selesai</h3>
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500" aria-hidden="true"></span>
+                    <span class="grid size-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 dark:bg-gray-800 dark:text-gray-100">
+                        <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9" stroke-width="1.8" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m8 12 2.5 2.5L16 9" />
+                        </svg>
+                    </span>
                 </header>
-                <p class="text-3xl font-bold text-emerald-600 mb-1">6</p>
+                <p x-data="countUp(@js($statusCounts['completed']))" x-text="value" class="mb-1 text-3xl font-bold text-emerald-600 dark:text-gray-100">{{ $statusCounts['completed'] }}</p>
                 <footer class="text-xs text-slate-400">Indikator Kinerja</footer>
             </article>
 
             <article class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col">
-                <header class="flex justify-between items-start mb-4">
+                <header class="mb-4 flex items-start justify-between gap-3">
                     <h3 class="text-sm font-semibold text-slate-500">Deadline 30 Hari</h3>
-                    <span class="w-2.5 h-2.5 rounded-full bg-orange-500" aria-hidden="true"></span>
+                    <span class="grid size-10 place-items-center rounded-xl bg-orange-50 text-orange-700 dark:bg-gray-800 dark:text-gray-100">
+                        <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3 2.8 19a1.2 1.2 0 0 0 1 1.8h16.4a1.2 1.2 0 0 0 1-1.8L12 3Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 9v4m0 3h.01" />
+                        </svg>
+                    </span>
                 </header>
-                <p class="text-3xl font-bold text-orange-600 mb-1">0</p>
+                <p x-data="countUp(@js($statusCounts['deadlines']))" x-text="value" class="mb-1 text-3xl font-bold text-orange-600 dark:text-gray-100">{{ $statusCounts['deadlines'] }}</p>
                 <footer class="text-xs text-slate-400">Jadwal Mendatang</footer>
             </article>
         </section>

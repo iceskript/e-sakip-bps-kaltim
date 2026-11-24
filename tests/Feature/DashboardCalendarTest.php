@@ -2,7 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\CapaianKinerja;
+use App\Models\IkssMaster;
 use App\Models\Jadwal;
+use App\Models\Periode;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -176,5 +179,35 @@ class DashboardCalendarTest extends TestCase
             ->assertViewHas('soonActivities', function ($activities): bool {
                 return $activities->pluck('judul')->all() === ['Kegiatan segera'];
             });
+    }
+
+    public function test_dashboard_summarizes_indicator_statuses_for_the_active_period(): void
+    {
+        $period = Periode::factory()->create([
+            'tahun' => 2026,
+            'triwulan' => 'TW2',
+            'is_active' => true,
+        ]);
+        $indicators = IkssMaster::factory()->count(4)->create();
+
+        CapaianKinerja::factory()->create([
+            'ikss_master_id' => $indicators[0]->id,
+            'periode_id' => $period->id,
+            'status' => 'Sudah Diisi',
+        ]);
+        CapaianKinerja::factory()->create([
+            'ikss_master_id' => $indicators[1]->id,
+            'periode_id' => $period->id,
+            'status' => 'Sebagian',
+        ]);
+
+        $this->get(route('dashboard', ['month' => '2026-11']))
+            ->assertOk()
+            ->assertViewHas('statusCounts', [
+                'notStarted' => 2,
+                'inProgress' => 1,
+                'completed' => 1,
+                'deadlines' => 0,
+            ]);
     }
 }
