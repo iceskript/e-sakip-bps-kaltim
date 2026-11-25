@@ -53,6 +53,9 @@ Route::middleware(['auth', 'user.active'])->group(function () {
         ->name('ikss.capaian.edit');
     Route::put('/ikss/{ikssMaster}/capaian', [CapaianKinerjaController::class, 'update'])
         ->name('ikss.capaian.update');
+    Route::get('/capaian-kinerja/{capaianKinerja}/files/{fileId}', [CapaianKinerjaController::class, 'downloadEvidence'])
+        ->where('fileId', '[0-9a-fA-F-]{36}')
+        ->name('capaian-kinerja.files.download');
     Route::get('/entry-capaian', [EntryCapaianController::class, 'index'])
         ->name('capaian-kinerja.index');
     Route::put('/entry-capaian/{ikssMaster}', [EntryCapaianController::class, 'update'])

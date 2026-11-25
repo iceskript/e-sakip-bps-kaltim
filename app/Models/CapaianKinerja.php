@@ -24,6 +24,10 @@ class CapaianKinerja extends Model
         'capaian_tw_sebelumnya',
         'link_bukti',
         'kendala',
+        'capaian_iku',
+        'analisis_capaian',
+        'capaian_ro',
+        'tindak_lanjut',
         'status',
         'updated_by',
     ];
@@ -36,6 +40,10 @@ class CapaianKinerja extends Model
             'realisasi' => 'decimal:2',
             'capaian_persen' => 'decimal:2',
             'capaian_tw_sebelumnya' => 'decimal:2',
+            'capaian_iku' => 'array',
+            'analisis_capaian' => 'array',
+            'capaian_ro' => 'array',
+            'tindak_lanjut' => 'array',
         ];
     }
 

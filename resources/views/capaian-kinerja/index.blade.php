@@ -3,7 +3,7 @@
 @section('title', 'Entry Capaian Kinerja Triwulanan')
 
 @section('content')
-    <div class="space-y-5">
+    <div x-data="capaianModal()" @open-capaian-modal.window="open($event.detail.editUrl, $event.detail.updateUrl)" class="space-y-5">
         @if (session('success'))
             <div role="status" class="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:border-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-200">
                 {{ session('success') }}
@@ -198,7 +198,11 @@
                                     </td>
                                     <td class="px-5 py-4 text-center align-top">
                                         <div x-data class="flex flex-col items-center gap-2 sm:flex-row sm:justify-center">
-                                            <button type="button" @click="$refs.entryDialog.showModal()" aria-label="Edit capaian {{ $ikss->kode_indikator }}"
+                                            <button type="button"
+                                                data-edit-url="{{ route('ikss.capaian.edit', ['ikssMaster' => $ikss->id, 'tahun' => $tahun, 'triwulan' => $triwulan]) }}"
+                                                data-update-url="{{ route('ikss.capaian.update', $ikss) }}"
+                                                @click="$dispatch('open-capaian-modal', { editUrl: $event.currentTarget.dataset.editUrl, updateUrl: $event.currentTarget.dataset.updateUrl })"
+                                                aria-label="Edit capaian {{ $ikss->kode_indikator }}"
                                                 class="min-h-9 rounded-md bg-orange-500 px-4 py-1.5 text-xs font-medium text-white transition hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">
                                                 Edit
                                             </button>
@@ -327,5 +331,7 @@
                 Belum ada data IKSS.
             </div>
         @endforelse
+
+        @include('capaian-kinerja.partials.edit-modal')
     </div>
 @endsection
